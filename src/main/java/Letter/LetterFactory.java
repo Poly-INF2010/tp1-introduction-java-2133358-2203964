@@ -11,13 +11,26 @@ public final class LetterFactory {
     final static Double stripeThickness = maxHeight / 8;
     final static Double halfStripeThickness = stripeThickness / 2;
 
+    //added variable and function for letter
 
     /** TODO
      * Create the letter A graphically
      * @return BaseShape containing the letter A
      */
     public static BaseShape create_A()  {
-        return null;
+        Rectangle letter = new Rectangle(halfStripeThickness,maxHeight);
+        letter.translate(letter.getCoords(), new Point2d(-(halfMaxWidth/2),0.0));
+        letter.rotate(letter.getCoords(),Math.toRadians(10));
+
+        Rectangle rightStripe = new Rectangle(halfStripeThickness,maxHeight);
+        rightStripe.translate(rightStripe.getCoords(), new Point2d((halfMaxWidth/2),0.0));
+        rightStripe.rotate(rightStripe.getCoords(), Math.toRadians(-10));
+
+        Rectangle middleStripe = new Rectangle(halfMaxWidth,halfStripeThickness);
+
+        letter.addAll(rightStripe.getCoords());
+        letter.addAll(middleStripe.getCoords());
+        return letter;
     }
 
     /** TODO
@@ -25,7 +38,23 @@ public final class LetterFactory {
      * @return BaseShape containing the letter B
      */
     public static BaseShape create_B() {
-        return null;
+        double radius = halfMaxHeight/2;
+        double smallRadius = radius - halfStripeThickness;
+
+        Rectangle letter = new Rectangle(stripeThickness, maxHeight);
+        Circle topCircle = new Circle(halfMaxHeight/2);
+        Circle bottomCircle = new Circle(halfMaxHeight/2);
+        Circle insideCircle = new Circle(smallRadius);
+
+        letter.translate(letter.getCoords(), new Point2d(-halfMaxWidth+5, 0.0));
+        topCircle.removeAll(insideCircle.getCoords());
+        bottomCircle.removeAll(insideCircle.getCoords());
+        topCircle.translate(topCircle.getCoords(), new Point2d(3.0, halfMaxHeight/2));
+        bottomCircle.translate(bottomCircle.getCoords(), new Point2d(3.0, -halfMaxHeight/2));
+
+        letter.addAll(topCircle.getCoords());
+        letter.addAll(bottomCircle.getCoords());
+        return letter;
     }
 
     /** TODO
@@ -33,7 +62,15 @@ public final class LetterFactory {
      * @return BaseShape containing the letter C
      */
     public static BaseShape create_C() {
-        return null;
+        Ellipse letter = new Ellipse(maxWidth, maxHeight);
+        Ellipse inside = new Ellipse((halfMaxWidth+stripeThickness),(maxHeight-stripeThickness));
+        Rectangle rightStripe = new Rectangle(stripeThickness,((maxHeight-stripeThickness)-stripeThickness));
+
+        rightStripe.translate(rightStripe.getCoords(), new Point2d(stripeThickness+3,0.0));
+        letter.removeAll(inside.getCoords());
+        letter.removeAll(rightStripe.getCoords());
+
+        return letter;
     }
 
     /** TODO
@@ -41,7 +78,19 @@ public final class LetterFactory {
      * @return BaseShape containing the letter E
      */
     public static BaseShape create_E() {
-        return null;
+        Rectangle letter = new Rectangle(halfStripeThickness,maxHeight);
+        Rectangle topStripe = new Rectangle(maxWidth,halfStripeThickness);
+        Rectangle middleStripe = topStripe.clone();
+        Rectangle bottomStripe = topStripe.clone();
+
+        letter.translate(letter.getCoords(), new Point2d(-halfMaxWidth,0.0));
+        topStripe.translate(topStripe.getCoords(), new Point2d(0.0, halfMaxHeight-4));
+        bottomStripe.translate(middleStripe.getCoords(), new Point2d(0.0, -halfMaxHeight+4));
+
+        letter.addAll(topStripe.getCoords());
+        letter.addAll(middleStripe.getCoords());
+        letter.addAll(bottomStripe.getCoords());
+        return letter;
     }
 
     /** TODO
@@ -49,7 +98,16 @@ public final class LetterFactory {
      * @return BaseShape containing the letter H
      */
     public static BaseShape create_H() {
-        return null;
+        Rectangle letter = new Rectangle(stripeThickness, maxHeight);
+        Rectangle rightStripe = letter.clone();
+        Rectangle middleStripe = new Rectangle(maxWidth, stripeThickness);
+
+        letter.translate(letter.getCoords(),new Point2d(-halfMaxWidth,0.0));
+        rightStripe.translate(rightStripe.getCoords(), new Point2d(halfMaxWidth, 0.0));
+
+        letter.addAll(rightStripe.getCoords());
+        letter.addAll(middleStripe.getCoords());
+        return letter;
     }
 
     /** TODO
@@ -57,7 +115,17 @@ public final class LetterFactory {
      * @return BaseShape containing the letter N
      */
     public static BaseShape create_N() {
-        return null;
+        Rectangle letter = new Rectangle(halfStripeThickness,maxHeight);
+        Rectangle rightStripe = letter.clone();
+        Rectangle middleStripe = letter.clone();
+
+        letter.translate(letter.getCoords(), new Point2d(-halfMaxWidth+2, 0.0));
+        rightStripe.translate(rightStripe.getCoords(), new Point2d(halfMaxWidth-2, 0.0));
+        middleStripe.rotate(middleStripe.getCoords(), Math.toRadians(-20));
+
+        letter.addAll(rightStripe.getCoords());
+        letter.addAll(middleStripe.getCoords());
+        return letter;
     }
 
     /** TODO
@@ -65,7 +133,9 @@ public final class LetterFactory {
      * @return BaseShape containing the letter O
      */
     public static BaseShape create_O() {
-        return null;
+        Ellipse letter = new Ellipse(maxWidth, maxHeight);
+        Ellipse inside = new Ellipse((halfMaxWidth+stripeThickness),(maxHeight-stripeThickness));
+        letter.removeAll(inside.getCoords());
+        return letter;
     }
-
 }

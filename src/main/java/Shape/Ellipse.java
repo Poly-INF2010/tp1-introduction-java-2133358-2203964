@@ -11,7 +11,17 @@ public class Ellipse extends BaseShape {
      * @param heightDiameter Height of the Ellipse
      */
     public Ellipse(Double widthDiameter, Double heightDiameter) {
+        double widthRadius = widthDiameter/2;
+        double heightRadius = heightDiameter/2;
+        double incrementFactor = 0.5;
 
+        for(double x = -widthRadius; x < widthRadius; x += incrementFactor){
+            for(double y = -heightRadius; y < heightRadius; y += incrementFactor){
+                if((Math.pow(x,2)/(Math.pow(widthRadius,2))) + (Math.pow(y,2)/(Math.pow(heightRadius,2))) <= 1){
+                    add(new Point2d(x,y));
+                }
+            }
+        }
     }
 
     /** TODO
@@ -19,7 +29,23 @@ public class Ellipse extends BaseShape {
      * @param dimensions 2D point containing the width and height of the Ellipse
      */
     public Ellipse(Point2d dimensions) {
+       /* double widthDiameter = dimensions.X();
+        double heightDiameter = dimensions.Y();
+        double widthRadius = widthDiameter/2;
+        double heightRadius = heightDiameter/2;
+        double incrementFactor = 0.5;
+        double result = 0.0;
 
+        for(double x = -widthRadius; x < widthRadius; x += incrementFactor){
+
+            for(double y = -heightRadius; y < heightRadius; y += incrementFactor){
+                result = (Math.pow(x,2)/(Math.pow(heightRadius,2))) + (Math.pow(y,2)/(Math.pow(widthRadius,2)));
+                if(result <= 1){
+                    add(new Point2d(x,y));
+                }
+            }
+        }*/
+        this(dimensions.X(), dimensions.Y());
     }
 
     /**
@@ -27,7 +53,7 @@ public class Ellipse extends BaseShape {
      * @param coords Collection of 2D points
      */
     private Ellipse(Collection<Point2d> coords) {
-
+        super(coords);
     }
 
     /** TODO
@@ -35,6 +61,13 @@ public class Ellipse extends BaseShape {
      */
     @Override
     public Ellipse clone() {
-        return null;
+        /*Ellipse copyEllipse = new Ellipse(0.0,0.0);
+
+        for(Point2d point : getCoords()){
+            copyEllipse.add(new Point2d(point.X(), point.Y()));
+        }
+        return copyEllipse;*/
+
+        return new Ellipse(getCoords());
     }
 }
