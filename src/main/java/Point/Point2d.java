@@ -71,15 +71,6 @@ public class Point2d extends AbstractPoint {
         vector[Y] = newPoint[1];
         return this;
     }
-/*
-        double newX = rotationMatrix[0][0] * vector[X] + rotationMatrix[0][1] * vector[Y];
-        double newY = rotationMatrix[1][0] * vector[X] + rotationMatrix[1][1] * vector[Y];
-
-        vector[X] = newX;
-        vector[Y] = newY;
-        return this;
-
-    }*/
 
     /** TODO
      * Rotate the point by the given angle
