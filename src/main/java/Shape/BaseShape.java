@@ -104,9 +104,7 @@ public class BaseShape extends Transform implements Cloneable {
      * */
     public BaseShape replaceAll(Collection<Point2d> newCoords) {
         this.coords.clear();
-        for(Point2d point: newCoords){
-            this.coords.add(new Point2d(point.X(), point.Y()));
-        }
+        this.coords.addAll(cloneCoords(newCoords));
         return this;
     }
 
