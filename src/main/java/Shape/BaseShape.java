@@ -123,11 +123,7 @@ public class BaseShape extends Transform implements Cloneable {
      * @return Deep copy of all coordinates contained by this BaseShape
      */
     public Collection<Point2d> cloneCoords() {
-        Collection<Point2d> copyCoord = new ArrayList<>();
-        for(Point2d point:coords){
-            copyCoord.add(new Point2d(point.X(), point.Y()));
-        }
-        return copyCoord;
+        return cloneCoords(this.coords);
     }
 
     /** TODO
@@ -193,9 +189,7 @@ public class BaseShape extends Transform implements Cloneable {
      */
     public BaseShape clone() {
         BaseShape copyShape = new BaseShape();
-        for(Point2d point:coords){
-            copyShape.coords.add(new Point2d(point.X(), point.Y()));
-        }
+        copyShape.coords.addAll(cloneCoords(this.coords));
         return copyShape;
     }
 }
