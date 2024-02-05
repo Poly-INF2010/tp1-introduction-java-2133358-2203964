@@ -61,11 +61,9 @@ public class Point2d extends AbstractPoint {
     public Point2d rotate(Double[][] rotationMatrix) {
         Double[] newPoint = {0.0, 0.0};
         for(int i=0; i < vector.length;i++) {
-            double result = 0.0;
             for(int j=0; j < vector.length;j++) {
-                result += rotationMatrix[i][j] * vector[j];
+                newPoint[i] += rotationMatrix[i][j] * vector[j];
             }
-            newPoint[i] = result;
         }
         vector[X] = newPoint[0];
         vector[Y] = newPoint[1];
