@@ -29,16 +29,7 @@ public class Rectangle extends BaseShape {
      * @param dimensions 2D point containing the width and height of the rectangle
      */
     public Rectangle(Point2d dimensions) {
-        double halfWidth = dimensions.X()/2;
-        double halfHeight = dimensions.Y()/2;
-        double incrementFactor = 0.5;
-
-        for(double x = -halfWidth; x <= halfWidth; x += incrementFactor){
-            for(double y = -halfHeight; y <= halfHeight; y += incrementFactor){
-                add(new Point2d(x,y));
-            }
-        }
-
+        this(dimensions.X(), dimensions.Y());
     }
 
     /**
@@ -54,13 +45,11 @@ public class Rectangle extends BaseShape {
      */
     @Override
     public Rectangle clone() {
-      /* Rectangle copyRectangle = new Rectangle(0.0,0.0);
+      Rectangle copyRectangle = new Rectangle(0.0,0.0);
 
        for(Point2d point : getCoords()){
            copyRectangle.add(new Point2d(point.X(), point.Y()));
        }
-       return copyRectangle;*/
-
-       return new Rectangle(getCoords());
+       return copyRectangle;
     }
 }
