@@ -11,7 +11,12 @@ public final class LetterFactory {
     final static Double stripeThickness = maxHeight / 8;
     final static Double halfStripeThickness = stripeThickness / 2;
 
-    //added variable and function for letter
+    private static final int rotateStripeA = 10;
+    private static final double translateCircleB = 3.0;
+    private static final int rotateStripeN = -20;
+    private static final double removeTranslateStripeC = stripeThickness+3;
+    private static final double translateStripeE = halfMaxHeight-4;
+
 
     /** TODO
      * Create the letter A graphically
@@ -20,11 +25,11 @@ public final class LetterFactory {
     public static BaseShape create_A()  {
         Rectangle letter = new Rectangle(halfStripeThickness,maxHeight);
         letter.translate(letter.getCoords(), new Point2d(-(halfMaxWidth/2),0.0));
-        letter.rotate(letter.getCoords(),Math.toRadians(10));
+        letter.rotate(letter.getCoords(),Math.toRadians(rotateStripeA));
 
         Rectangle rightStripe = new Rectangle(halfStripeThickness,maxHeight);
         rightStripe.translate(rightStripe.getCoords(), new Point2d((halfMaxWidth/2),0.0));
-        rightStripe.rotate(rightStripe.getCoords(), Math.toRadians(-10));
+        rightStripe.rotate(rightStripe.getCoords(), Math.toRadians(-rotateStripeA));
 
         Rectangle middleStripe = new Rectangle(halfMaxWidth,halfStripeThickness);
 
@@ -49,8 +54,8 @@ public final class LetterFactory {
         letter.translate(letter.getCoords(), new Point2d(-halfMaxWidth+5, 0.0));
         topCircle.removeAll(insideCircle.getCoords());
         bottomCircle.removeAll(insideCircle.getCoords());
-        topCircle.translate(topCircle.getCoords(), new Point2d(3.0, halfMaxHeight/2));
-        bottomCircle.translate(bottomCircle.getCoords(), new Point2d(3.0, -halfMaxHeight/2));
+        topCircle.translate(topCircle.getCoords(), new Point2d(translateCircleB, halfMaxHeight/2));
+        bottomCircle.translate(bottomCircle.getCoords(), new Point2d(translateCircleB, -halfMaxHeight/2));
 
         letter.addAll(topCircle.getCoords());
         letter.addAll(bottomCircle.getCoords());
@@ -66,7 +71,7 @@ public final class LetterFactory {
         Ellipse inside = new Ellipse((halfMaxWidth+stripeThickness),(maxHeight-stripeThickness));
         Rectangle rightStripe = new Rectangle(stripeThickness,((maxHeight-stripeThickness)-stripeThickness));
 
-        rightStripe.translate(rightStripe.getCoords(), new Point2d(stripeThickness+3,0.0));
+        rightStripe.translate(rightStripe.getCoords(), new Point2d(removeTranslateStripeC,0.0));
         letter.removeAll(inside.getCoords());
         letter.removeAll(rightStripe.getCoords());
 
@@ -84,8 +89,8 @@ public final class LetterFactory {
         Rectangle bottomStripe = topStripe.clone();
 
         letter.translate(letter.getCoords(), new Point2d(-halfMaxWidth,0.0));
-        topStripe.translate(topStripe.getCoords(), new Point2d(0.0, halfMaxHeight-4));
-        bottomStripe.translate(middleStripe.getCoords(), new Point2d(0.0, -halfMaxHeight+4));
+        topStripe.translate(topStripe.getCoords(), new Point2d(0.0, translateStripeE));
+        bottomStripe.translate(middleStripe.getCoords(), new Point2d(0.0, -translateStripeE));
 
         letter.addAll(topStripe.getCoords());
         letter.addAll(middleStripe.getCoords());
@@ -121,7 +126,7 @@ public final class LetterFactory {
 
         letter.translate(letter.getCoords(), new Point2d(-halfMaxWidth+2, 0.0));
         rightStripe.translate(rightStripe.getCoords(), new Point2d(halfMaxWidth-2, 0.0));
-        middleStripe.rotate(middleStripe.getCoords(), Math.toRadians(-20));
+        middleStripe.rotate(middleStripe.getCoords(), Math.toRadians(rotateStripeN));
 
         letter.addAll(rightStripe.getCoords());
         letter.addAll(middleStripe.getCoords());
