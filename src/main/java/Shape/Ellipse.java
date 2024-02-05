@@ -29,22 +29,6 @@ public class Ellipse extends BaseShape {
      * @param dimensions 2D point containing the width and height of the Ellipse
      */
     public Ellipse(Point2d dimensions) {
-       /* double widthDiameter = dimensions.X();
-        double heightDiameter = dimensions.Y();
-        double widthRadius = widthDiameter/2;
-        double heightRadius = heightDiameter/2;
-        double incrementFactor = 0.5;
-        double result = 0.0;
-
-        for(double x = -widthRadius; x < widthRadius; x += incrementFactor){
-
-            for(double y = -heightRadius; y < heightRadius; y += incrementFactor){
-                result = (Math.pow(x,2)/(Math.pow(heightRadius,2))) + (Math.pow(y,2)/(Math.pow(widthRadius,2)));
-                if(result <= 1){
-                    add(new Point2d(x,y));
-                }
-            }
-        }*/
         this(dimensions.X(), dimensions.Y());
     }
 
@@ -61,13 +45,11 @@ public class Ellipse extends BaseShape {
      */
     @Override
     public Ellipse clone() {
-        /*Ellipse copyEllipse = new Ellipse(0.0,0.0);
+        Ellipse copyEllipse = new Ellipse(0.0,0.0);
 
         for(Point2d point : getCoords()){
             copyEllipse.add(new Point2d(point.X(), point.Y()));
         }
-        return copyEllipse;*/
-
-        return new Ellipse(getCoords());
+        return copyEllipse;
     }
 }
