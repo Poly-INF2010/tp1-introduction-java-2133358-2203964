@@ -16,7 +16,16 @@ public final class LetterFactory {
     private static final int rotateStripeN = -20;
     private static final double removeTranslateStripeC = stripeThickness+3;
     private static final double translateStripeE = halfMaxHeight-4;
+    private static final double ellipseHeight = maxHeight-stripeThickness;
+    private static final double ellipseWidth = halfMaxWidth+stripeThickness;
+    private static final double stripeHeightC =(ellipseHeight-stripeThickness);
 
+    public static void translateShape(BaseShape shape, double x, double y){
+        shape.translate(shape.getCoords(), new Point2d(x,y));
+    }
+    public static void rotateShape(BaseShape shape, double angle){
+        shape.rotate(shape.getCoords(), Math.toRadians(angle));
+    }
 
     /** TODO
      * Create the letter A graphically
@@ -24,12 +33,12 @@ public final class LetterFactory {
      */
     public static BaseShape create_A()  {
         Rectangle letter = new Rectangle(halfStripeThickness,maxHeight);
-        letter.translate(letter.getCoords(), new Point2d(-(halfMaxWidth/2),0.0));
-        letter.rotate(letter.getCoords(),Math.toRadians(rotateStripeA));
+        translateShape(letter, -(halfMaxWidth/2), 0.0);
+        rotateShape(letter, rotateStripeA);
 
         Rectangle rightStripe = new Rectangle(halfStripeThickness,maxHeight);
-        rightStripe.translate(rightStripe.getCoords(), new Point2d((halfMaxWidth/2),0.0));
-        rightStripe.rotate(rightStripe.getCoords(), Math.toRadians(-rotateStripeA));
+        translateShape(rightStripe, (halfMaxWidth/2), 0.0);
+        rotateShape(rightStripe, -rotateStripeA);
 
         Rectangle middleStripe = new Rectangle(halfMaxWidth,halfStripeThickness);
 
@@ -43,19 +52,18 @@ public final class LetterFactory {
      * @return BaseShape containing the letter B
      */
     public static BaseShape create_B() {
-        double radius = halfMaxHeight/2;
-        double smallRadius = radius - halfStripeThickness;
+        double smallRadius = (halfMaxHeight/2) - halfStripeThickness;
 
         Rectangle letter = new Rectangle(stripeThickness, maxHeight);
         Circle topCircle = new Circle(halfMaxHeight/2);
         Circle bottomCircle = new Circle(halfMaxHeight/2);
         Circle insideCircle = new Circle(smallRadius);
 
-        letter.translate(letter.getCoords(), new Point2d(-halfMaxWidth+5, 0.0));
+        translateShape(letter, -(halfMaxWidth+5), 0.0);
         topCircle.removeAll(insideCircle.getCoords());
         bottomCircle.removeAll(insideCircle.getCoords());
-        topCircle.translate(topCircle.getCoords(), new Point2d(translateCircleB, halfMaxHeight/2));
-        bottomCircle.translate(bottomCircle.getCoords(), new Point2d(translateCircleB, -halfMaxHeight/2));
+        translateShape(topCircle, translateCircleB, halfMaxHeight/2);
+        translateShape(bottomCircle, translateCircleB, -halfMaxHeight/2);
 
         letter.addAll(topCircle.getCoords());
         letter.addAll(bottomCircle.getCoords());
@@ -68,10 +76,10 @@ public final class LetterFactory {
      */
     public static BaseShape create_C() {
         Ellipse letter = new Ellipse(maxWidth, maxHeight);
-        Ellipse inside = new Ellipse((halfMaxWidth+stripeThickness),(maxHeight-stripeThickness));
-        Rectangle rightStripe = new Rectangle(stripeThickness,((maxHeight-stripeThickness)-stripeThickness));
+        Ellipse inside = new Ellipse(ellipseWidth, ellipseHeight);
+        Rectangle rightStripe = new Rectangle(stripeThickness, stripeHeightC);
 
-        rightStripe.translate(rightStripe.getCoords(), new Point2d(removeTranslateStripeC,0.0));
+        translateShape(rightStripe, removeTranslateStripeC,0.0);
         letter.removeAll(inside.getCoords());
         letter.removeAll(rightStripe.getCoords());
 
@@ -88,9 +96,9 @@ public final class LetterFactory {
         Rectangle middleStripe = topStripe.clone();
         Rectangle bottomStripe = topStripe.clone();
 
-        letter.translate(letter.getCoords(), new Point2d(-halfMaxWidth,0.0));
-        topStripe.translate(topStripe.getCoords(), new Point2d(0.0, translateStripeE));
-        bottomStripe.translate(middleStripe.getCoords(), new Point2d(0.0, -translateStripeE));
+        translateShape(letter, -halfMaxWidth, 0.0);
+        translateShape(topStripe,0.0, translateStripeE);
+        translateShape(bottomStripe, 0.0, -translateStripeE);
 
         letter.addAll(topStripe.getCoords());
         letter.addAll(middleStripe.getCoords());
@@ -107,8 +115,8 @@ public final class LetterFactory {
         Rectangle rightStripe = letter.clone();
         Rectangle middleStripe = new Rectangle(maxWidth, stripeThickness);
 
-        letter.translate(letter.getCoords(),new Point2d(-halfMaxWidth,0.0));
-        rightStripe.translate(rightStripe.getCoords(), new Point2d(halfMaxWidth, 0.0));
+        translateShape(letter, -halfMaxWidth, 0.0);
+        translateShape(rightStripe, halfMaxWidth, 0.0);
 
         letter.addAll(rightStripe.getCoords());
         letter.addAll(middleStripe.getCoords());
@@ -124,9 +132,9 @@ public final class LetterFactory {
         Rectangle rightStripe = letter.clone();
         Rectangle middleStripe = letter.clone();
 
-        letter.translate(letter.getCoords(), new Point2d(-halfMaxWidth+2, 0.0));
-        rightStripe.translate(rightStripe.getCoords(), new Point2d(halfMaxWidth-2, 0.0));
-        middleStripe.rotate(middleStripe.getCoords(), Math.toRadians(rotateStripeN));
+        translateShape(letter, -(halfMaxWidth+2),0.0);
+        translateShape(rightStripe, (halfMaxWidth-2),0.0 );
+        rotateShape(middleStripe, rotateStripeN);
 
         letter.addAll(rightStripe.getCoords());
         letter.addAll(middleStripe.getCoords());
@@ -139,7 +147,7 @@ public final class LetterFactory {
      */
     public static BaseShape create_O() {
         Ellipse letter = new Ellipse(maxWidth, maxHeight);
-        Ellipse inside = new Ellipse((halfMaxWidth+stripeThickness),(maxHeight-stripeThickness));
+        Ellipse inside = new Ellipse(ellipseWidth, ellipseHeight);
         letter.removeAll(inside.getCoords());
         return letter;
     }
