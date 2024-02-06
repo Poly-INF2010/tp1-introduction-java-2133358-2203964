@@ -11,14 +11,15 @@ public final class LetterFactory {
     final static Double stripeThickness = maxHeight / 8;
     final static Double halfStripeThickness = stripeThickness / 2;
 
-    private static final int rotateStripeA = 10;
-    private static final double translateCircleB = 3.0;
-    private static final int rotateStripeN = -20;
-    private static final double removeTranslateStripeC = stripeThickness+3;
-    private static final double translateStripeE = halfMaxHeight-4;
-    private static final double ellipseHeight = maxHeight-stripeThickness;
-    private static final double ellipseWidth = halfMaxWidth+stripeThickness;
-    private static final double stripeHeightC =(ellipseHeight-stripeThickness);
+    final static int rotateStripeA = 10;
+    final static double translateCircleB = 3.0;
+    final static int rotateStripeN = -20;
+    final static double removeTranslateStripeC = stripeThickness+3;
+    final static double translateStripeE = halfMaxHeight-4;
+    final static double ellipseHeight = maxHeight-stripeThickness;
+    final static double ellipseWidth = halfMaxWidth+stripeThickness;
+    final static double stripeHeightC =(ellipseHeight-stripeThickness);
+    final static double smallRadius = (halfMaxHeight/2) - halfStripeThickness;
 
     public static void translateShape(BaseShape shape, double x, double y){
         shape.translate(shape.getCoords(), new Point2d(x,y));
@@ -52,8 +53,6 @@ public final class LetterFactory {
      * @return BaseShape containing the letter B
      */
     public static BaseShape create_B() {
-        double smallRadius = (halfMaxHeight/2) - halfStripeThickness;
-
         Rectangle letter = new Rectangle(stripeThickness, maxHeight);
         Circle topCircle = new Circle(halfMaxHeight/2);
         Circle bottomCircle = new Circle(halfMaxHeight/2);
